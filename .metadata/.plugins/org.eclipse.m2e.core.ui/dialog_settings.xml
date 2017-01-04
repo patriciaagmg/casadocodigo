@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="/home/patricia/java/CLONE/casadocodigo"/>
 			<item value="/home/patricia/java/workspaceSpringMVC/forge/casadocodigo"/>
 		</list>
 		<list key="projectNameTemplate">

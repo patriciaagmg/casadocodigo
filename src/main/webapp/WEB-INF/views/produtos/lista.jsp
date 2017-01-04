@@ -17,9 +17,9 @@
 
 	<table>
 		<tr>
-			<td>Título</td>
-			<td>Descrição</td>
-			<td>Páginas</td>
+			<td> <s:message code="titulo"/></td>
+			<td><s:message code="decricao"/></td>
+			<td><s:message code="paginas"/></td>
 		</tr>
 		
 		<c:forEach items="${produtos }" var="produto">
