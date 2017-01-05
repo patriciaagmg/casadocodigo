@@ -12,13 +12,14 @@
 
 <div>${sucesso}</div>
 <div>${falha}</div>
+<div>${erro}</div>
 
 <h1> <s:message code="listas.de.produtos"></s:message> </h1>
 
 	<table>
 		<tr>
 			<td> <s:message code="titulo"/></td>
-			<td><s:message code="decricao"/></td>
+			<td><s:message code="descricao"/></td>
 			<td><s:message code="paginas"/></td>
 		</tr>
 		
