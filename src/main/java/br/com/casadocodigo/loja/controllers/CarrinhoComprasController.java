@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.casadocodigo.loja.daos.ProdutoDAO;
+import br.com.casadocodigo.loja.daos.IProdutoDAO;
+import br.com.casadocodigo.loja.daos.imp.ProdutoDAO;
+import br.com.casadocodigo.loja.facade.IProdutoFacade;
 import br.com.casadocodigo.loja.models.CarrinhoCompras;
 import br.com.casadocodigo.loja.models.CarrinhoItem;
 import br.com.casadocodigo.loja.models.Produto;
@@ -19,8 +21,8 @@ import br.com.casadocodigo.loja.models.TipoPreco;
 @Scope(value=WebApplicationContext.SCOPE_REQUEST) //para cada request novo na aplicação, um novo controller será criado.
 public class CarrinhoComprasController {
 	
-	@Autowired  /* injeta o produto dao*/
-	private ProdutoDAO produtoDAO;
+	@Autowired  /* injeta o produto facade*/
+	private IProdutoFacade produtoFacade;
 	
 	@Autowired
 	private CarrinhoCompras carrinho;
@@ -37,7 +39,7 @@ public class CarrinhoComprasController {
 	}
 
 	private CarrinhoItem criaItem(Integer produtoId, TipoPreco tipoPreco){
-		Produto produto = produtoDAO.find(produtoId);
+		Produto produto = produtoFacade.find(produtoId);
 		 
 		CarrinhoItem carrinhoItem = new CarrinhoItem(produto, tipoPreco);
 		

@@ -15,7 +15,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.casadocodigo.loja.controllers.HomeController;
-import br.com.casadocodigo.loja.daos.ProdutoDAO;
+import br.com.casadocodigo.loja.daos.IProdutoDAO;
+import br.com.casadocodigo.loja.daos.imp.ProdutoDAO;
+import br.com.casadocodigo.loja.facade.IProdutoFacade;
 import br.com.casadocodigo.loja.infra.FileSaver;
 import br.com.casadocodigo.loja.models.CarrinhoCompras;
 
@@ -27,7 +29,7 @@ import br.com.casadocodigo.loja.models.CarrinhoCompras;
  *
  */
 @EnableWebMvc
-@ComponentScan(basePackageClasses={HomeController.class,ProdutoDAO.class, FileSaver.class,CarrinhoCompras.class})
+@ComponentScan(basePackageClasses={HomeController.class,IProdutoDAO.class,IProdutoFacade.class, FileSaver.class,CarrinhoCompras.class})
 public class AppWebConfiguration {
 
 	

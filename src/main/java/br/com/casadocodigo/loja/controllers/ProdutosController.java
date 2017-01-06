@@ -16,7 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.casadocodigo.loja.daos.ProdutoDAO;
+import br.com.casadocodigo.loja.daos.IProdutoDAO;
+import br.com.casadocodigo.loja.daos.imp.ProdutoDAO;
+import br.com.casadocodigo.loja.facade.IProdutoFacade;
 import br.com.casadocodigo.loja.infra.FileSaver;
 import br.com.casadocodigo.loja.models.Produto;
 import br.com.casadocodigo.loja.models.TipoPreco;
@@ -26,8 +28,8 @@ import br.com.casadocodigo.loja.validation.ProdutoValidation;
 @RequestMapping("/produtos")
 public class ProdutosController {
 
-	@Autowired  /* injeta o produto dao*/
-	private ProdutoDAO produtoDAO;
+	@Autowired  /* injeta o produto facade*/
+	private IProdutoFacade produtoFacade;
 	
 	@Autowired
 	private FileSaver fileSaver;
@@ -62,7 +64,7 @@ public class ProdutosController {
 		String path = fileSaver.write("arquivos-sumario", sumario);
 		produto.setSumarioPath(path);
 		
-		produtoDAO.gravar(produto);
+		produtoFacade.gravar(produto);
 		
 		redirectAttributes.addFlashAttribute("sucesso","Produto Cadastrado com sucesso!"); //Mensagem de sucesso que será exibida na página de listagem, chamada na próxima linha.
 		return new ModelAndView("redirect:produtos");
@@ -72,7 +74,7 @@ public class ProdutosController {
 	//@RequestMapping(value="/produtos", method=RequestMethod.GET)
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView listar(){
-		List<Produto> produtos = produtoDAO.listar();
+		List<Produto> produtos = produtoFacade.listar();
 		ModelAndView modelAndView = new ModelAndView("produtos/lista");
 		modelAndView.addObject("produtos",produtos);
 		
@@ -84,7 +86,7 @@ public class ProdutosController {
 	@RequestMapping("/detalhe/{id}")
 	public ModelAndView detalhe(@PathVariable("id") Integer id){
 		ModelAndView modelAndView = new ModelAndView("produtos/detalhe");
-		Produto produto = produtoDAO.find(id);
+		Produto produto = produtoFacade.find(id);
 		modelAndView.addObject("produto",produto);
 		
 		return modelAndView;
